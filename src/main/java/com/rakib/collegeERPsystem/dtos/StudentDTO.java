@@ -13,8 +13,8 @@ public class StudentDTO {
     private String phone;
     private LocalDate dob;
     private String gender;
-    private Long userId;       // just the ID, not full User
-    private Long deptId;       // just the ID, not full Department
-    private String admissionYear;
+//    private Long userId;       // just the ID, not full User
+//    private Long deptId;       // just the ID, not full Department
+//    private String admissionYear;
     private boolean active;    // from BaseEntity
 }

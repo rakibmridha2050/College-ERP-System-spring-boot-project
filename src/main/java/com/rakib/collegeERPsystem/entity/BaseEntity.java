@@ -17,7 +17,7 @@ public class BaseEntity implements Serializable {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     //    private LocalDateTime deleteAt;
-    private boolean active;
+    private Boolean active;
 
 
 

@@ -23,14 +23,14 @@ public class StudentService {
 
     // Create or Save
     public Student saveStudent(StudentDTO dto) {
-        Department department = departmentRepository.findById(dto.getDeptId())
-                .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDeptId()));
+//        Department department = departmentRepository.findById(dto.getDeptId())
+//                .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDeptId()));
 
-        User user = null;
-        if (dto.getUserId() != null) {
-            user = userRepository.findById(dto.getUserId())
-                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
-        }
+//        User user = null;
+//        if (dto.getUserId() != null) {
+//            user = userRepository.findById(dto.getUserId())
+//                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+//        }
 
         Student student = new Student();
         student.setRollNo(dto.getRollNo());
@@ -39,9 +39,9 @@ public class StudentService {
         student.setPhone(dto.getPhone());
         student.setDob(dto.getDob());
         student.setGender(dto.getGender());
-        student.setAdmissionYear(dto.getAdmissionYear());
-        student.setDepartment(department);
-        student.setUser(user);
+//        student.setAdmissionYear(dto.getAdmissionYear());
+//        student.setDepartment(department);
+//        student.setUser(user);
 
         return studentRepository.save(student);
     }
@@ -61,14 +61,14 @@ public class StudentService {
     public Student updateStudent(Long id, StudentDTO dto) {
         Student existingStudent = getStudentById(id);
 
-        Department department = departmentRepository.findById(dto.getDeptId())
-                .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDeptId()));
-
-        User user = null;
-        if (dto.getUserId() != null) {
-            user = userRepository.findById(dto.getUserId())
-                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
-        }
+//        Department department = departmentRepository.findById(dto.getDeptId())
+//                .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDeptId()));
+//
+//        User user = null;
+//        if (dto.getUserId() != null) {
+//            user = userRepository.findById(dto.getUserId())
+//                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+//        }
 
         existingStudent.setRollNo(dto.getRollNo());
         existingStudent.setName(dto.getName());
@@ -76,9 +76,9 @@ public class StudentService {
         existingStudent.setPhone(dto.getPhone());
         existingStudent.setDob(dto.getDob());
         existingStudent.setGender(dto.getGender());
-        existingStudent.setAdmissionYear(dto.getAdmissionYear());
-        existingStudent.setDepartment(department);
-        existingStudent.setUser(user);
+//        existingStudent.setAdmissionYear(dto.getAdmissionYear());
+//        existingStudent.setDepartment(department);
+//        existingStudent.setUser(user);
 
         return studentRepository.save(existingStudent);
     }

@@ -13,14 +13,14 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByRollNo(String rollNo);
 
     // Find students by department
-    List<Student> findByDepartmentId(Long deptId);
+//    List<Student> findByDepartmentId(Long deptId);
 
     // Find students by admission year
-    List<Student> findByAdmissionYear(String admissionYear);
+//    List<Student> findByAdmissionYear(String admissionYear);
 
     // Find students by active status
-    List<Student> findByActiveTrue();
+//    List<Student> findByActiveTrue();
 
     // Example: find by user ID
-    Optional<Student> findByUserId(Long userId);
+//    Optional<Student> findByUserId(Long userId);
 }
