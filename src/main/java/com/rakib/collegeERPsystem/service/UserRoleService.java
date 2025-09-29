@@ -45,18 +45,20 @@ public class UserRoleService {
 
     // Get Roles by User
     public List<UserRoleDTO> getRolesByUser(Long userId) {
-        return userRoleRepository.findByUserUserId(userId)
+        return userRoleRepository.findByUserId(userId) // repository method
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
+    // Get Users by Role
     public List<UserRoleDTO> getUsersByRole(Long roleId) {
-        return userRoleRepository.findByRoleRoleId(roleId)
+        return userRoleRepository.findByRoleId(roleId) // repository method
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
+
 
 
     public UserRoleDTO updateUserRole(Long userRoleId, Long newRoleId) {
@@ -81,15 +83,15 @@ public class UserRoleService {
         userRoleRepository.deleteById(userRoleId);
     }
 
-    // Mapping
     private UserRoleDTO mapToDTO(UserRole userRole) {
         return UserRoleDTO.builder()
-                .userRoleId(userRole.getUserRoleId())
-                .userId(userRole.getUser().getUserId())
-                .username(userRole.getUser().getUsername())
-                .roleId(userRole.getRole().getRoleId())
-                .roleName(userRole.getRole().getRoleName())
-                .assignedDate(userRole.getAssignedDate().toString())
+                .id(userRole.getId())
+                .userId(userRole.getUser() != null ? userRole.getUser().getId() : null)
+                .username(userRole.getUser() != null ? userRole.getUser().getUsername() : null)
+                .roleId(userRole.getRole() != null ? userRole.getRole().getId() : null)
+                .roleName(userRole.getRole() != null ? userRole.getRole().getRoleName() : null)
+                .assignedDate(userRole.getAssignedDate() != null ? userRole.getAssignedDate().toString() : null)
                 .build();
     }
+
 }

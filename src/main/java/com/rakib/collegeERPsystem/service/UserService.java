@@ -72,7 +72,7 @@ public class UserService {
     // Mapping
     private UserDTO mapToDTO(User user) {
         return UserDTO.builder()
-                .userId(user.getUserId())
+                .userId(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .roleType(user.getRoleType())

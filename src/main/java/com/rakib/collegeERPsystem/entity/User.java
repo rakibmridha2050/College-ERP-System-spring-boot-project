@@ -13,10 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+public class User extends BaseEntity{
+
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -31,19 +29,10 @@ public class User {
     @Column(nullable = false)
     private String roleType;
 
-    private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
 
-    @PreUpdate
-    public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+
+
 
 }

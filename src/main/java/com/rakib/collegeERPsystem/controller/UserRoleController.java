@@ -23,14 +23,12 @@ public class UserRoleController {
         return ResponseEntity.ok(userRoleService.assignRoleToUser(userId, roleId));
     }
 
-    // Get Roles by User
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{userId}/roles")
     public ResponseEntity<List<UserRoleDTO>> getRolesByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userRoleService.getRolesByUser(userId));
     }
 
-    // Get Users by Role
-    @GetMapping("/role/{roleId}")
+    @GetMapping("/role/{roleId}/users")
     public ResponseEntity<List<UserRoleDTO>> getUsersByRole(@PathVariable Long roleId) {
         return ResponseEntity.ok(userRoleService.getUsersByRole(roleId));
     }

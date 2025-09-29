@@ -64,7 +64,7 @@ public class RoleService {
     // Mapping
     private RoleDTO mapToDTO(Role role) {
         return RoleDTO.builder()
-                .roleId(role.getRoleId())
+                .roleId(role.getId())
                 .roleName(role.getRoleName())
                 .build();
     }
