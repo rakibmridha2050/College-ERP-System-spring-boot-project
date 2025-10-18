@@ -20,6 +20,7 @@ public class TeacherService {
     // ✅ Mapper: DTO -> Entity
     private Teacher mapToEntity(TeacherDTO dto) {
         Teacher teacher = new Teacher();
+        teacher.setId(dto.getId());
         teacher.setFirstName(dto.getFirstName());
         teacher.setLastName(dto.getLastName());
         teacher.setEmail(dto.getEmail());
@@ -28,12 +29,18 @@ public class TeacherService {
         teacher.setDob(dto.getDob());
         teacher.setDesignation(dto.getDesignation());
         teacher.setAddress(dto.getAddress());
+        // default active
+        teacher.setActive(dto.getActive() != null ? dto.getActive() : true);
         return teacher;
     }
 
     // ✅ Mapper: Entity -> DTO
     private TeacherDTO mapToDTO(Teacher entity) {
         TeacherDTO dto = new TeacherDTO();
+
+
+        dto.setId(entity.getId());
+
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());
@@ -42,6 +49,9 @@ public class TeacherService {
         dto.setDob(entity.getDob());
         dto.setDesignation(entity.getDesignation());
         dto.setAddress(entity.getAddress());
+        dto.setCreatedAt(entity.getCreatedAt());
+        dto.setUpdatedAt(entity.getUpdatedAt());
+        dto.setActive(entity.getActive());
         return dto;
     }
 

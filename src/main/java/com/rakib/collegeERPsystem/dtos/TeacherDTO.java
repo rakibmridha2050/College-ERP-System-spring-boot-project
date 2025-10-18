@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class TeacherDTO {
@@ -17,4 +18,9 @@ public class TeacherDTO {
     private LocalDate dob;
     private String designation;
     private String address;
+
+    // From BaseEntity
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Boolean active;
 }

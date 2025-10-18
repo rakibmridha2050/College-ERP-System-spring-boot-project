@@ -19,7 +19,8 @@ public class TeacherController {
     // ✅ Create Teacher
     @PostMapping
     public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
-        return ResponseEntity.ok(teacherService.createTeacher(teacherDTO));
+        TeacherDTO savedTeacher = teacherService.createTeacher(teacherDTO);
+        return ResponseEntity.ok(savedTeacher);
     }
 
     // ✅ Get All Teachers

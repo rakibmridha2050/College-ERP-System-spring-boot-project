@@ -30,6 +30,17 @@ public class Student extends BaseEntity{
     @Column(name = "gender")
     private String gender;
 
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private Classes classEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section section;
+
+
+
+
     // Many students belong to one user
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id", nullable = false)
