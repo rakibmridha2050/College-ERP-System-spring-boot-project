@@ -1,5 +1,7 @@
 package com.rakib.collegeERPsystem.entity.exam;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rakib.collegeERPsystem.entity.Course;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,9 +31,11 @@ public class Exam {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+
     private Course course;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<Question> questions;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
