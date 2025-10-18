@@ -2,7 +2,7 @@ package com.rakib.collegeERPsystem.controller;
 
 
 
-import com.rakib.collegeERPsystem.dtos.StudentCourseEnrollmentDTO;
+import com.rakib.collegeERPsystem.dto.StudentCourseEnrollmentDTO;
 import com.rakib.collegeERPsystem.enums.EnrollmentStatus;
 import com.rakib.collegeERPsystem.service.StudentCourseEnrollmentService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.rakib.collegeERPsystem.controller;
 
-import com.rakib.collegeERPsystem.dtos.UserRoleDTO;
+import com.rakib.collegeERPsystem.dto.UserRoleDTO;
 import com.rakib.collegeERPsystem.service.UserRoleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.rakib.collegeERPsystem.controller;
 
-import com.rakib.collegeERPsystem.dtos.ClassesDTO;
-import com.rakib.collegeERPsystem.dtos.ClassesCreateDTO;
+import com.rakib.collegeERPsystem.dto.ClassesDTO;
+import com.rakib.collegeERPsystem.dto.ClassesCreateDTO;
 import com.rakib.collegeERPsystem.service.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

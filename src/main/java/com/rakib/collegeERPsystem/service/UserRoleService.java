@@ -1,6 +1,6 @@
 package com.rakib.collegeERPsystem.service;
 
-import com.rakib.collegeERPsystem.dtos.UserRoleDTO;
+import com.rakib.collegeERPsystem.dto.UserRoleDTO;
 import com.rakib.collegeERPsystem.entity.Role;
 import com.rakib.collegeERPsystem.entity.User;
 import com.rakib.collegeERPsystem.entity.UserRole;

@@ -1,10 +1,8 @@
 package com.rakib.collegeERPsystem.service;
 
 
-import com.rakib.collegeERPsystem.dtos.StudentDTO;
-import com.rakib.collegeERPsystem.entity.Department;
+import com.rakib.collegeERPsystem.dto.StudentDTO;
 import com.rakib.collegeERPsystem.entity.Student;
-import com.rakib.collegeERPsystem.entity.User;
 import com.rakib.collegeERPsystem.repository.DepartmentRepository;
 import com.rakib.collegeERPsystem.repository.StudentRepository;
 import com.rakib.collegeERPsystem.repository.UserRepository;

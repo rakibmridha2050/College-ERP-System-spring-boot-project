@@ -1,7 +1,7 @@
 package com.rakib.collegeERPsystem.service;
 
 
-import com.rakib.collegeERPsystem.dtos.UserDTO;
+import com.rakib.collegeERPsystem.dto.UserDTO;
 import com.rakib.collegeERPsystem.entity.User;
 import com.rakib.collegeERPsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,7 @@
 package com.rakib.collegeERPsystem.service;
 
-import com.rakib.collegeERPsystem.dtos.ClassesDTO;
-import com.rakib.collegeERPsystem.dtos.SectionDTO;
-import com.rakib.collegeERPsystem.dtos.SectionCreateDTO;
+import com.rakib.collegeERPsystem.dto.SectionDTO;
+import com.rakib.collegeERPsystem.dto.SectionCreateDTO;
 import com.rakib.collegeERPsystem.entity.Classes;
 import com.rakib.collegeERPsystem.entity.Section;
 import com.rakib.collegeERPsystem.repository.ClassesRepository;

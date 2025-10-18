@@ -1,5 +1,5 @@
 package com.rakib.collegeERPsystem.controller;
-import com.rakib.collegeERPsystem.dtos.FacultyDTO;
+import com.rakib.collegeERPsystem.dto.FacultyDTO;
 import com.rakib.collegeERPsystem.service.FacultyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

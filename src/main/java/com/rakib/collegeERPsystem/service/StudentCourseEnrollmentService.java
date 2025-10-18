@@ -2,7 +2,7 @@ package com.rakib.collegeERPsystem.service;
 
 
 
-import com.rakib.collegeERPsystem.dtos.StudentCourseEnrollmentDTO;
+import com.rakib.collegeERPsystem.dto.StudentCourseEnrollmentDTO;
 import com.rakib.collegeERPsystem.entity.Course;
 import com.rakib.collegeERPsystem.entity.Student;
 import com.rakib.collegeERPsystem.entity.StudentCourseEnrollment;

@@ -1,7 +1,5 @@
-package com.rakib.collegeERPsystem.dtos;
+package com.rakib.collegeERPsystem.dto;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 
 @Getter

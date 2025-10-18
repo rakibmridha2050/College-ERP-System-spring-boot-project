@@ -1,5 +1,5 @@
 package com.rakib.collegeERPsystem.controller;
-import com.rakib.collegeERPsystem.dtos.FacultyCourseAssignmentDTO;
+import com.rakib.collegeERPsystem.dto.FacultyCourseAssignmentDTO;
 import com.rakib.collegeERPsystem.entity.FacultyCourseAssignment;
 import com.rakib.collegeERPsystem.service.FacultyCourseAssignmentService;
 import lombok.RequiredArgsConstructor;

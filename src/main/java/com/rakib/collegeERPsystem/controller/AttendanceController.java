@@ -1,7 +1,7 @@
 package com.rakib.collegeERPsystem.controller;
 
-import com.rakib.collegeERPsystem.dtos.AttendanceRequestDTO;
-import com.rakib.collegeERPsystem.dtos.AttendanceResponseDTO;
+import com.rakib.collegeERPsystem.dto.AttendanceRequestDTO;
+import com.rakib.collegeERPsystem.dto.AttendanceResponseDTO;
 import com.rakib.collegeERPsystem.service.AttendanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

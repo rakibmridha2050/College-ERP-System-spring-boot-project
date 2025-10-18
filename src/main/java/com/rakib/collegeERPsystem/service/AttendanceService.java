@@ -1,7 +1,7 @@
 package com.rakib.collegeERPsystem.service;
 
-import com.rakib.collegeERPsystem.dtos.AttendanceRequestDTO;
-import com.rakib.collegeERPsystem.dtos.AttendanceResponseDTO;
+import com.rakib.collegeERPsystem.dto.AttendanceRequestDTO;
+import com.rakib.collegeERPsystem.dto.AttendanceResponseDTO;
 import com.rakib.collegeERPsystem.entity.*;
 import com.rakib.collegeERPsystem.repository.*;
 import lombok.RequiredArgsConstructor;

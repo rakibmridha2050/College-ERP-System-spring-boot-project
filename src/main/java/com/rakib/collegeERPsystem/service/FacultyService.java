@@ -1,5 +1,5 @@
 package com.rakib.collegeERPsystem.service;
-import com.rakib.collegeERPsystem.dtos.FacultyDTO;
+import com.rakib.collegeERPsystem.dto.FacultyDTO;
 import com.rakib.collegeERPsystem.entity.Department;
 import com.rakib.collegeERPsystem.entity.Faculty;
 import com.rakib.collegeERPsystem.entity.User;

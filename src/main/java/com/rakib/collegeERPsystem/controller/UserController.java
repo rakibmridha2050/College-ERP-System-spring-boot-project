@@ -1,6 +1,6 @@
 package com.rakib.collegeERPsystem.controller;
 
-import com.rakib.collegeERPsystem.dtos.UserDTO;
+import com.rakib.collegeERPsystem.dto.UserDTO;
 import com.rakib.collegeERPsystem.entity.User;
 import com.rakib.collegeERPsystem.service.UserService;
 import org.springframework.http.ResponseEntity;

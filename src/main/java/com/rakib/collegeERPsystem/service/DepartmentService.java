@@ -1,7 +1,7 @@
 package com.rakib.collegeERPsystem.service;
 
 
-import com.rakib.collegeERPsystem.dtos.DepartmentDTO;
+import com.rakib.collegeERPsystem.dto.DepartmentDTO;
 import com.rakib.collegeERPsystem.entity.Department;
 import com.rakib.collegeERPsystem.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;

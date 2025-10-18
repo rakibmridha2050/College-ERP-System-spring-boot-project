@@ -1,6 +1,6 @@
 package com.rakib.collegeERPsystem.controller;
 
-import com.rakib.collegeERPsystem.dtos.StudentDTO;
+import com.rakib.collegeERPsystem.dto.StudentDTO;
 import com.rakib.collegeERPsystem.entity.Student;
 import com.rakib.collegeERPsystem.service.StudentService;
 import lombok.RequiredArgsConstructor;
