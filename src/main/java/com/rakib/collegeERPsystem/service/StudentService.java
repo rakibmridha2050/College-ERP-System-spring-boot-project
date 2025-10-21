@@ -31,7 +31,7 @@ public class StudentService {
 //        }
 
         Student student = new Student();
-        student.setRollNo(dto.getRollNo());
+        student.setStudentId(dto.getStudentId());
         student.setName(dto.getName());
         student.setEmail(dto.getEmail());
         student.setPhone(dto.getPhone());
@@ -68,7 +68,7 @@ public class StudentService {
 //                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
 //        }
 
-        existingStudent.setRollNo(dto.getRollNo());
+        existingStudent.setStudentId(dto.getStudentId());
         existingStudent.setName(dto.getName());
         existingStudent.setEmail(dto.getEmail());
         existingStudent.setPhone(dto.getPhone());

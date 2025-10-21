@@ -17,4 +17,14 @@ public class StudentDTO {
 //    private Long deptId;       // just the ID, not full Department
 //    private String admissionYear;
     private boolean active;    // from BaseEntity
+
+
+
+    private String studentId;
+    private String program;
+    private String department;
+    private int currentSemester;
+    private String permanentAddress;
+    private String presentAddress;
+    private Boolean isActive;
 }

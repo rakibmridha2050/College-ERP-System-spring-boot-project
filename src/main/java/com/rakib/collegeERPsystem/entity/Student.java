@@ -1,58 +1,79 @@
 package com.rakib.collegeERPsystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.rakib.collegeERPsystem.entity.payment.FeeWaiver;
+import com.rakib.collegeERPsystem.entity.payment.StudentFee;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.validation.constraints.*;
+import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
 @Data
 @NoArgsConstructor
-public class Student extends BaseEntity{
-    @Column(name = "roll_no", nullable = false, unique = true)
-    private String rollNo;
+@AllArgsConstructor
+@Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Student extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    @Column(name = "student_id", unique = true, nullable = false, length = 20)
+    private String studentId; // Unique university roll, e.g. CSE-2025-001
+
+    @NotBlank
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(name = "phone")
+    @Pattern(regexp = "^(\\+88)?01[3-9]\\d{8}$", message = "Invalid Bangladeshi mobile number")
+    @NotBlank
     private String phone;
 
-    @Column(name = "dob")
     private LocalDate dob;
 
-    @Column(name = "gender")
     private String gender;
 
-    @ManyToOne
+    @NotBlank
+    private String program; // e.g. BSc in CSE
+
+    @NotBlank
+    private String department; // e.g. Computer Science & Engineering
+
+    @Min(1)
+    private int currentSemester;
+
+    @Column(name = "permanent_address", columnDefinition = "TEXT")
+    private String permanentAddress;
+
+    @Column(name = "present_address", columnDefinition = "TEXT")
+    private String presentAddress;
+
+    private Boolean isActive = true;
+
+    // 🔗 Many Students belong to one Class
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
     private Classes classEntity;
 
-    @ManyToOne
+    // 🔗 Many Students belong to one Section
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private Section section;
 
+    // 🔗 One Student can have many Fee Invoices
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentFee> studentFees;
 
-
-
-    // Many students belong to one user
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    private User user;
-//
-//    // Many students belong to one department
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "dept_id", nullable = false)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    private Department department;
-//
-//    @Column(name = "admission_year")
-//    private String admissionYear;
+    // 🔗 One Student can have multiple Fee Waivers
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FeeWaiver> feeWaivers;
 }
