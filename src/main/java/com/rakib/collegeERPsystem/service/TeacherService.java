@@ -82,7 +82,7 @@ public class TeacherService {
         Teacher existingTeacher = teacherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
 
-        // Email check: যদি email same teacher-এর হয় তাহলে ok, না হলে duplicate check
+        //
         if (!existingTeacher.getEmail().equals(teacherDetails.getEmail())
                 && teacherRepository.existsByEmail(teacherDetails.getEmail())) {
             throw new RuntimeException("Email already exists!");
@@ -92,9 +92,9 @@ public class TeacherService {
         existingTeacher.setLastName(teacherDetails.getLastName());
         existingTeacher.setEmail(teacherDetails.getEmail());
         existingTeacher.setPhoneNumber(teacherDetails.getPhoneNumber());
-        // ... baki fields update করুন
+        //
 
-        return teacherRepository.save(existingTeacher); // এখানে Hibernate update করবে
+        return teacherRepository.save(existingTeacher); // 
     }
 
 

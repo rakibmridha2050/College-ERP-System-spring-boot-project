@@ -34,7 +34,7 @@ public class Attendance extends BaseEntity {
     @JoinColumn(name = "section_id")
     private Section section;
 
-    // date এ attendance
+    //
     @Column(name = "attendance_date", nullable = false)
     private LocalDateTime attendanceDate = LocalDateTime.now();
 
