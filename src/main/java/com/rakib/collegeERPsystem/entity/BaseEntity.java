@@ -16,14 +16,14 @@ public class BaseEntity implements Serializable {
     @Column(updatable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    //    private LocalDateTime deleteAt;
+
     private Boolean active;
 
 
 
     private String createdBy;
     private String updatedBy;
-//    private String deletedBy;
+
 
 
 
@@ -41,12 +41,5 @@ public class BaseEntity implements Serializable {
         this.updatedAt = LocalDateTime.now();
 
     }
-//
-//    public void softDelete(){
-//        this.deleteAt = LocalDateTime.now();
-//    }
-//
-//    public boolean isDelete(){
-//        return this.deleteAt != null;
-//    }
+
 }

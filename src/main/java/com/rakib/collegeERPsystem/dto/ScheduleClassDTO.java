@@ -11,7 +11,6 @@ import java.time.LocalTime;
 public class ScheduleClassDTO {
     private Long id;
     private String type;
-
     private LocalTime startTime;
 
     private LocalTime endTime;
