@@ -18,37 +18,35 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Student extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @NotBlank
-    @Column(name = "student_id", unique = true, nullable = false, length = 20)
+
+//    @NotBlank
+//    @Column(name = "student_id", unique = true, nullable = false, length = 20)
     private String studentId; // Unique university roll, e.g. CSE-2025-001
 
-    @NotBlank
+//    @NotBlank
     private String name;
 
-    @Email
-    @NotBlank
-    @Column(unique = true, nullable = false)
+//    @Email
+//    @NotBlank
+//    @Column(unique = true, nullable = false)
     private String email;
 
-    @Pattern(regexp = "^(\\+88)?01[3-9]\\d{8}$", message = "Invalid Bangladeshi mobile number")
-    @NotBlank
+//    @Pattern(regexp = "^(\\+88)?01[3-9]\\d{8}$", message = "Invalid Bangladeshi mobile number")
+//    @NotBlank
     private String phone;
 
     private LocalDate dob;
 
     private String gender;
 
-    @NotBlank
+//    @NotBlank
     private String program; // e.g. BSc in CSE
 
-    @NotBlank
+//    @NotBlank
     private String department; // e.g. Computer Science & Engineering
 
-    @Min(1)
+//    @Min(1)
     private int currentSemester;
 
     @Column(name = "permanent_address", columnDefinition = "TEXT")

@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,5 +23,5 @@ public class Classes extends BaseEntity{
     private Department department;
 
     @OneToMany(mappedBy = "classes")
-    private List<Section> sections;
+    private List<Section> sections = new ArrayList<>();
 }

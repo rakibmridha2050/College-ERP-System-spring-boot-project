@@ -3,7 +3,6 @@ package com.rakib.collegeERPsystem.controller;
 import com.rakib.collegeERPsystem.dto.SectionDTO;
 import com.rakib.collegeERPsystem.dto.SectionCreateDTO;
 import com.rakib.collegeERPsystem.service.SectionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,12 @@ import java.util.List;
 @RequestMapping("/api/sections")
 public class SectionController {
 
-    @Autowired
-    private SectionService sectionService;
+    private final SectionService sectionService;
+
+    // Constructor injection
+    public SectionController(SectionService sectionService) {
+        this.sectionService = sectionService;
+    }
 
     // ---------------- Create Section ----------------
     @PostMapping
@@ -40,24 +43,38 @@ public class SectionController {
         return ResponseEntity.ok(dto);
     }
 
-    // ---------------- Get All Sections ----------------
+    // ---------------- Get All Sections (Active only) ----------------
     @GetMapping
     public ResponseEntity<List<SectionDTO>> getAllSections() {
         List<SectionDTO> sections = sectionService.getAllSections();
         return ResponseEntity.ok(sections);
     }
 
-    // ---------------- Delete Section ----------------
+    // ---------------- Get All Sections Including Inactive ----------------
+    @GetMapping("/all")
+    public ResponseEntity<List<SectionDTO>> getAllSectionsIncludingInactive() {
+        List<SectionDTO> sections = sectionService.getAllSectionsIncludingInactive();
+        return ResponseEntity.ok(sections);
+    }
+
+    // ---------------- Delete Section (Soft Delete) ----------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSection(@PathVariable Long id) {
         sectionService.deleteSection(id);
         return ResponseEntity.noContent().build();
     }
 
-    // ---------------- Optional: Get Sections by Class ID ----------------
+    // ---------------- Get Sections by Class ID ----------------
     @GetMapping("/by-class/{classId}")
     public ResponseEntity<List<SectionDTO>> getSectionsByClassId(@PathVariable Long classId) {
         List<SectionDTO> sections = sectionService.getSectionsByClassId(classId);
         return ResponseEntity.ok(sections);
+    }
+
+    // ---------------- Restore Section ----------------
+    @PostMapping("/{id}/restore")
+    public ResponseEntity<SectionDTO> restoreSection(@PathVariable Long id) {
+        SectionDTO restoredSection = sectionService.restoreSection(id);
+        return ResponseEntity.ok(restoredSection);
     }
 }

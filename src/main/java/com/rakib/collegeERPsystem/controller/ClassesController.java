@@ -3,7 +3,10 @@ package com.rakib.collegeERPsystem.controller;
 import com.rakib.collegeERPsystem.dto.ClassesDTO;
 import com.rakib.collegeERPsystem.dto.ClassesCreateDTO;
 import com.rakib.collegeERPsystem.service.ClassesService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,46 +14,45 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/classes")
+@RequiredArgsConstructor
 public class ClassesController {
 
-    @Autowired
-    private ClassesService classesService;
 
-    // ---------------- Create Class ----------------
+    private final ClassesService classesService;
+
+
+
     @PostMapping
-    public ResponseEntity<ClassesDTO> createClass(@RequestBody ClassesCreateDTO createDTO) {
+    public ResponseEntity<ClassesDTO> createClass(@Valid @RequestBody ClassesCreateDTO createDTO) {
         ClassesDTO createdClass = classesService.createClass(createDTO);
-        return ResponseEntity.ok(createdClass);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdClass);
     }
 
-    // ---------------- Update Class ----------------
+
+
+    @GetMapping
+    public ResponseEntity<List<ClassesDTO>> getAllClasses() {
+        List<ClassesDTO> classes = classesService.getAllClasses();
+        return ResponseEntity.ok(classes);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClassesDTO> getClassById(@PathVariable Long id) {
+        ClassesDTO classDTO = classesService.getClassById(id);
+        return ResponseEntity.ok(classDTO);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<ClassesDTO> updateClass(
-            @PathVariable Long id,
-            @RequestBody ClassesCreateDTO updateDTO
-    ) {
+    public ResponseEntity<ClassesDTO> updateClass(@PathVariable Long id,
+                                                  @Valid @RequestBody ClassesCreateDTO updateDTO) {
         ClassesDTO updatedClass = classesService.updateClass(id, updateDTO);
         return ResponseEntity.ok(updatedClass);
     }
 
-    // ---------------- Get Class by ID ----------------
-    @GetMapping("/{id}")
-    public ResponseEntity<ClassesDTO> getClassById(@PathVariable Long id) {
-        ClassesDTO dto = classesService.getClassById(id);
-        return ResponseEntity.ok(dto);
-    }
-
-    // ---------------- Get All Classes ----------------
-    @GetMapping
-    public ResponseEntity<List<ClassesDTO>> getAllClasses() {
-        List<ClassesDTO> classesList = classesService.getAllClasses();
-        return ResponseEntity.ok(classesList);
-    }
-
-    // ---------------- Delete Class ----------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClass(@PathVariable Long id) {
         classesService.deleteClass(id);
         return ResponseEntity.noContent().build();
     }
+
 }
