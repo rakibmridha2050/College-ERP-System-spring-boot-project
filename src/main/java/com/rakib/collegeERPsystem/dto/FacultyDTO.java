@@ -6,14 +6,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class FacultyDTO {
-
-    private Long id;             // inherited from BaseEntity
+    private Long id;
     private String name;
     private String email;
     private String phone;
     private String designation;
-    private Long userId;         // reference to User
-    private String userName;     // optional, if you want to include User's name
-    private Long departmentId;   // reference to Department
-    private String departmentName; // optional, Department name
+    private Long userId;         // Make sure this is included
+    private String userName;
+    private Long departmentId;
+    private String departmentName;
 }

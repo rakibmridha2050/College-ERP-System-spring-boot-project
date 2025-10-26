@@ -3,6 +3,7 @@ package com.rakib.collegeERPsystem.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,8 +23,12 @@ public class Department extends BaseEntity{
     private List<Classes> classes;
 
 
-    // Many departments can have one HOD (faculty)
-//    @ManyToOne
-//    @JoinColumn(name = "hod_id", referencedColumnName = "facultyId")
-//    private Faculty hod;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Faculty> facultyList = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Course> courses = new ArrayList<>();
+
 }

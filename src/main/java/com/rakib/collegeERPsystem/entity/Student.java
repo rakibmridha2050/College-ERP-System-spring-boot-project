@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,8 +44,17 @@ public class Student extends BaseEntity {
 //    @NotBlank
     private String program; // e.g. BSc in CSE
 
-//    @NotBlank
-    private String department; // e.g. Computer Science & Engineering
+    @ManyToMany
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dept_id")
+    private Department department;
 
 //    @Min(1)
     private int currentSemester;

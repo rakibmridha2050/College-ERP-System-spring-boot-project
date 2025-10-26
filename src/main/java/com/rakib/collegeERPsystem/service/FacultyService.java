@@ -11,16 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class FacultyService {
 
     private final FacultyRepository facultyRepository;
-    private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
+    private final UserRepository userRepository;
 
-    // Get all faculty
+
     public List<FacultyDTO> getAllFaculty() {
         return facultyRepository.findAll()
                 .stream()
@@ -28,32 +27,58 @@ public class FacultyService {
                 .collect(Collectors.toList());
     }
 
-    // Get faculty by ID
     public FacultyDTO getFacultyById(Long id) {
         Faculty faculty = facultyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Faculty not found with id: " + id));
         return mapToDTO(faculty);
     }
 
-    // Create or update faculty
+
+
+//    public FacultyDTO saveFaculty(FacultyDTO dto) {
+//        Faculty faculty = mapToEntity(dto);
+//        Faculty saved = facultyRepository.save(faculty);
+//        return mapToDTO(saved);
+//    }
+
+
+
+//    public void deleteFaculty(Long id) {
+//        facultyRepository.deleteById(id);
+//    }
+
+
     public FacultyDTO saveFaculty(FacultyDTO dto) {
-        Faculty faculty = new Faculty();
+        Faculty faculty;
+
+        // Handle update scenario properly
         if (dto.getId() != null) {
+            // For update, get the existing entity first
             faculty = facultyRepository.findById(dto.getId())
-                    .orElse(new Faculty());
+                    .orElseThrow(() -> new RuntimeException("Faculty not found with id: " + dto.getId()));
+
+            // Update the fields
+            faculty.setName(dto.getName());
+            faculty.setEmail(dto.getEmail());
+            faculty.setPhone(dto.getPhone());
+            faculty.setDesignation(dto.getDesignation());
+        } else {
+            // For create, use the builder
+            faculty = Faculty.builder()
+                    .name(dto.getName())
+                    .email(dto.getEmail())
+                    .phone(dto.getPhone())
+                    .designation(dto.getDesignation())
+                    .build();
         }
 
-        // Set fields
-        faculty.setName(dto.getName());
-        faculty.setEmail(dto.getEmail());
-        faculty.setPhone(dto.getPhone());
-        faculty.setDesignation(dto.getDesignation());
-
-        // Set User
+        // Set User - REQUIRED since user_id is NOT NULL in database
         if (dto.getUserId() != null) {
             User user = userRepository.findById(dto.getUserId())
                     .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
             faculty.setUser(user);
+        } else {
+            throw new RuntimeException("User ID is required for Faculty");
         }
 
         // Set Department
@@ -61,18 +86,67 @@ public class FacultyService {
             Department department = departmentRepository.findById(dto.getDepartmentId())
                     .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDepartmentId()));
             faculty.setDepartment(department);
+        } else {
+            throw new RuntimeException("Department ID is required for Faculty");
         }
 
         Faculty saved = facultyRepository.save(faculty);
         return mapToDTO(saved);
     }
 
-    // Delete faculty
     public void deleteFaculty(Long id) {
         facultyRepository.deleteById(id);
     }
 
-    // Map entity to DTO
+    // Get faculty by department ID
+    public List<FacultyDTO> getFacultyByDepartmentId(Long departmentId) {
+        return facultyRepository.findByDepartmentId(departmentId)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Get faculty by department ID
+//    public List<FacultyDTO> getFacultyByDepartmentId(Long departmentId) {
+//        return facultyRepository.findByDepartmentId(departmentId)
+//                .stream()
+//                .map(this::mapToDTO)
+//                .collect(Collectors.toList());
+//    }
+
+    private Faculty mapToEntity(FacultyDTO dto) {
+        Faculty faculty = Faculty.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .phone(dto.getPhone())
+                .designation(dto.getDesignation())
+                .build();
+
+        if (dto.getId() != null) {
+            faculty.setId(dto.getId());
+        }
+
+        // Set User - REQUIRED since user_id is NOT NULL in database
+        if (dto.getUserId() != null) {
+            User user = userRepository.findById(dto.getUserId())
+                    .orElseThrow(() -> new RuntimeException("User not found with id: " + dto.getUserId()));
+            faculty.setUser(user);
+        } else {
+            throw new RuntimeException("User ID is required for Faculty");
+        }
+
+        // Set Department
+        if (dto.getDepartmentId() != null) {
+            Department department = departmentRepository.findById(dto.getDepartmentId())
+                    .orElseThrow(() -> new RuntimeException("Department not found with id: " + dto.getDepartmentId()));
+            faculty.setDepartment(department);
+        } else {
+            throw new RuntimeException("Department ID is required for Faculty");
+        }
+
+        return faculty;
+    }
+
     private FacultyDTO mapToDTO(Faculty faculty) {
         return FacultyDTO.builder()
                 .id(faculty.getId())
