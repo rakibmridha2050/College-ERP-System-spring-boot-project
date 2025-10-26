@@ -10,9 +10,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/notices")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class NoticeController {
 
     private final NoticeService noticeService;
+
+
+    @GetMapping("/{id}")
+    public Notice getNoticeById(@PathVariable Long id){
+
+            return noticeService.getById(id);
+
+    }
 
     @GetMapping("/published")
     public List<Notice> getPublishedNotices() {

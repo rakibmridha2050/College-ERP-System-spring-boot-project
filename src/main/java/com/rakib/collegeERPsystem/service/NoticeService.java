@@ -16,6 +16,11 @@ public class NoticeService {
         return noticeRepository.findByIsPublishedTrue();
     }
 
+    public Notice getById(Long id){
+        return noticeRepository.findById(id).orElseThrow();
+    }
+
+
     public Notice createNotice(Notice notice) {
         notice.setPublishDate(notice.getPublishDate() == null ?
                 java.time.LocalDateTime.now() : notice.getPublishDate());
