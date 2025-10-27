@@ -1,6 +1,9 @@
 package com.rakib.collegeERPsystem.repository;
+
 import com.rakib.collegeERPsystem.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,18 +12,33 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    // Find student by roll number
-//    Optional<Student> findByRollNo(String rollNo);
+    Optional<Student> findByStudentId(String studentId);
 
-    // Find students by department
-//    List<Student> findByDepartmentId(Long deptId);
+    Optional<Student> findByEmail(String email);
 
-    // Find students by admission year
-//    List<Student> findByAdmissionYear(String admissionYear);
+    List<Student> findByNameContainingIgnoreCase(String name);
 
-    // Find students by active status
-//    List<Student> findByActiveTrue();
+    List<Student> findByProgram(String program);
 
-    // Example: find by user ID
-//    Optional<Student> findByUserId(Long userId);
+    List<Student> findByCurrentSemester(int semester);
+
+    List<Student> findByDepartmentId(Long departmentId);
+
+    List<Student> findByClassEntityId(Long classId);
+
+    List<Student> findBySectionId(Long sectionId);
+
+    List<Student> findByIsActiveTrue();
+
+    List<Student> findByIsActiveFalse();
+
+    @Query("SELECT s FROM Student s WHERE s.department.id = :deptId AND s.currentSemester = :semester")
+    List<Student> findByDepartmentAndSemester(@Param("deptId") Long deptId, @Param("semester") int semester);
+
+    boolean existsByStudentId(String studentId);
+
+    boolean existsByEmail(String email);
+
+    @Query("SELECT COUNT(s) FROM Student s WHERE s.department.id = :departmentId")
+    Long countByDepartmentId(@Param("departmentId") Long departmentId);
 }

@@ -1,9 +1,11 @@
 package com.rakib.collegeERPsystem.controller;
 
 import com.rakib.collegeERPsystem.dto.StudentDTO;
-import com.rakib.collegeERPsystem.entity.Student;
+import com.rakib.collegeERPsystem.dto.StudentResponseDTO;
 import com.rakib.collegeERPsystem.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,58 +14,97 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
     private final StudentService studentService;
 
-    // Create
     @PostMapping
-    public ResponseEntity<?> createStudent(@RequestBody StudentDTO dto) {
-        try {
-            Student savedStudent = studentService.saveStudent(dto);
-            return ResponseEntity.ok(savedStudent);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<StudentResponseDTO> createStudent(@Valid @RequestBody StudentDTO studentDTO) {
+        StudentResponseDTO createdStudent = studentService.createStudent(studentDTO);
+        return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
-    // Read all
     @GetMapping
-    public ResponseEntity<List<Student>> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents());
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudents() {
+        List<StudentResponseDTO> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
     }
 
-    // Read one
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStudent(@PathVariable Long id) {
-        try {
-            Student student = studentService.getStudentById(id);
-            return ResponseEntity.ok(student);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable Long id) {
+        StudentResponseDTO student = studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
     }
 
-    // Update
+    @GetMapping("/student-id/{studentId}")
+    public ResponseEntity<StudentResponseDTO> getStudentByStudentId(@PathVariable String studentId) {
+        StudentResponseDTO student = studentService.getStudentByStudentId(studentId);
+        return ResponseEntity.ok(student);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable Long id, @RequestBody StudentDTO dto) {
-        try {
-            Student updatedStudent = studentService.updateStudent(id, dto);
-            return ResponseEntity.ok(updatedStudent);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<StudentResponseDTO> updateStudent(
+            @PathVariable Long id,
+            @Valid @RequestBody StudentDTO studentDTO) {
+        StudentResponseDTO updatedStudent = studentService.updateStudent(id, studentDTO);
+        return ResponseEntity.ok(updatedStudent);
     }
 
-    // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
-        try {
-            studentService.deleteStudent(id);
-            return ResponseEntity.ok("Student deleted successfully");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/soft-delete")
+    public ResponseEntity<Void> softDeleteStudent(@PathVariable Long id) {
+        studentService.softDeleteStudent(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/department/{departmentId}")
+    public ResponseEntity<List<StudentResponseDTO>> getStudentsByDepartment(@PathVariable Long departmentId) {
+        List<StudentResponseDTO> students = studentService.getStudentsByDepartment(departmentId);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/program/{program}")
+    public ResponseEntity<List<StudentResponseDTO>> getStudentsByProgram(@PathVariable String program) {
+        List<StudentResponseDTO> students = studentService.getStudentsByProgram(program);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/semester/{semester}")
+    public ResponseEntity<List<StudentResponseDTO>> getStudentsBySemester(@PathVariable int semester) {
+        List<StudentResponseDTO> students = studentService.getStudentsBySemester(semester);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<StudentResponseDTO>> searchStudentsByName(@RequestParam String name) {
+        List<StudentResponseDTO> students = studentService.searchStudentsByName(name);
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<StudentResponseDTO>> getActiveStudents() {
+        List<StudentResponseDTO> students = studentService.getActiveStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @PostMapping("/{studentId}/courses")
+    public ResponseEntity<StudentResponseDTO> addCoursesToStudent(
+            @PathVariable Long studentId,
+            @RequestBody List<Long> courseIds) {
+        StudentResponseDTO student = studentService.addCoursesToStudent(studentId, courseIds);
+        return ResponseEntity.ok(student);
+    }
+
+    @DeleteMapping("/{studentId}/courses")
+    public ResponseEntity<StudentResponseDTO> removeCoursesFromStudent(
+            @PathVariable Long studentId,
+            @RequestBody List<Long> courseIds) {
+        StudentResponseDTO student = studentService.removeCoursesFromStudent(studentId, courseIds);
+        return ResponseEntity.ok(student);
     }
 }
