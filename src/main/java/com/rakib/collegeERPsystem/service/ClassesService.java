@@ -134,6 +134,10 @@ public class ClassesService {
         classesRepository.deleteById(id);
     }
 
+    public List<Classes> getClassesByDepartment(Long departmentId) {
+        return classesRepository.findByDepartment_Id(departmentId);
+    }
+
 
 
 

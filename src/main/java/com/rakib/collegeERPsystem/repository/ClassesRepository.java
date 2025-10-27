@@ -20,6 +20,8 @@ public interface ClassesRepository extends JpaRepository<Classes, Long> {
 
     Optional<Classes> findByIdAndActiveTrue(Long id);
 
+    List<Classes> findByDepartment_Id(Long departmentId);
+
 
     Classes findByClassNameAndDepartment(String className, Department department);
 }

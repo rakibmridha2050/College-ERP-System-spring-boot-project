@@ -2,6 +2,7 @@ package com.rakib.collegeERPsystem.controller;
 
 import com.rakib.collegeERPsystem.dto.ClassesDTO;
 import com.rakib.collegeERPsystem.dto.ClassesCreateDTO;
+import com.rakib.collegeERPsystem.entity.Classes;
 import com.rakib.collegeERPsystem.service.ClassesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,11 @@ public class ClassesController {
     public ResponseEntity<ClassesDTO> createClass(@Valid @RequestBody ClassesCreateDTO createDTO) {
         ClassesDTO createdClass = classesService.createClass(createDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdClass);
+    }
+
+    @GetMapping("/department/{departmentId}")
+    public List<Classes> getClassesByDepartment(@PathVariable Long departmentId) {
+        return classesService.getClassesByDepartment(departmentId);
     }
 
 
