@@ -1,45 +1,60 @@
 package com.rakib.collegeERPsystem.entity;
 
+
+
 import com.rakib.collegeERPsystem.enums.AttendanceStatus;
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "attendance")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Attendance extends BaseEntity {
+@Table(name = "attendances")
+public class Attendance {
 
-    // --- student-course enrollment ----- attendance
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enrollment_id", nullable = false)
-    private StudentCourseEnrollment enrollment;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // faculty attendance
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "faculty_id", nullable = false)
-    private Faculty faculty;
+    private Long enrollmentId;
+    private Long facultyId;
+    private Long classId;
+    private Long sectionId;
 
-    // Optional: class
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_id")
-    private Classes classes;
+    private LocalDate attendanceDate;
 
-    // Optional: section
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "section_id")
-    private Section section;
-
-    //
-    @Column(name = "attendance_date", nullable = false)
-    private LocalDateTime attendanceDate = LocalDateTime.now();
-
-    // Attendance  status
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private AttendanceStatus status;
+
+    // ✅ Constructors
+    public Attendance() {}
+
+    public Attendance(Long enrollmentId, Long facultyId, Long classId, Long sectionId, LocalDate attendanceDate, AttendanceStatus status) {
+        this.enrollmentId = enrollmentId;
+        this.facultyId = facultyId;
+        this.classId = classId;
+        this.sectionId = sectionId;
+        this.attendanceDate = attendanceDate;
+        this.status = status;
+    }
+
+    // ✅ Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getEnrollmentId() { return enrollmentId; }
+    public void setEnrollmentId(Long enrollmentId) { this.enrollmentId = enrollmentId; }
+
+    public Long getFacultyId() { return facultyId; }
+    public void setFacultyId(Long facultyId) { this.facultyId = facultyId; }
+
+    public Long getClassId() { return classId; }
+    public void setClassId(Long classId) { this.classId = classId; }
+
+    public Long getSectionId() { return sectionId; }
+    public void setSectionId(Long sectionId) { this.sectionId = sectionId; }
+
+    public LocalDate getAttendanceDate() { return attendanceDate; }
+    public void setAttendanceDate(LocalDate attendanceDate) { this.attendanceDate = attendanceDate; }
+
+    public AttendanceStatus getStatus() { return status; }
+    public void setStatus(AttendanceStatus status) { this.status = status; }
 }

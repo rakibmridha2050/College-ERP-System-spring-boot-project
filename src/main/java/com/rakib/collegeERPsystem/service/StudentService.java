@@ -37,7 +37,11 @@ public class StudentService {
             throw new RuntimeException("Email already exists: " + studentDTO.getEmail());
         }
 
+        Section section = sectionRepository.findById(studentDTO.getSectionId()).orElseThrow();
+
+
         Student student = convertToEntity(studentDTO);
+        student.setSection(section);
         Student savedStudent = studentRepository.save(student);
 
         log.info("Student created successfully with ID: {}", savedStudent.getId());
@@ -54,6 +58,11 @@ public class StudentService {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found with id: " + id));
         return convertToResponseDTO(student);
+    }
+    public List<StudentResponseDTO> getStudentBySectionId(Long id) {
+        List<Student> students = studentRepository.findBySectionId(id);
+
+        return students.stream().map(this::convertToResponseDTO).toList();
     }
 
     public StudentResponseDTO getStudentByStudentId(String studentId) {

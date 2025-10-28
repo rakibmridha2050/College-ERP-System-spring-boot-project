@@ -1,54 +1,51 @@
 package com.rakib.collegeERPsystem.controller;
 
+
 import com.rakib.collegeERPsystem.dto.AttendanceRequestDTO;
-import com.rakib.collegeERPsystem.dto.AttendanceResponseDTO;
+import com.rakib.collegeERPsystem.entity.Attendance;
 import com.rakib.collegeERPsystem.service.AttendanceService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/attendances")
-@RequiredArgsConstructor
-public class AttendanceController {
+    @RequestMapping("/api/attendances")
+    @CrossOrigin(origins = "http://localhost:4200") // allow Angular dev server
+    public class AttendanceController {
 
-    private final AttendanceService attendanceService;
+        private final AttendanceService attendanceService;
 
-    // Create attendance
-    @PostMapping
-    public ResponseEntity<AttendanceResponseDTO> createAttendance(@RequestBody AttendanceRequestDTO requestDTO) {
-        AttendanceResponseDTO responseDTO = attendanceService.createAttendance(requestDTO);
-        return ResponseEntity.ok(responseDTO);
+        public AttendanceController(AttendanceService attendanceService) {
+            this.attendanceService = attendanceService;
+        }
+
+        @PostMapping
+        public ResponseEntity<Attendance> create(@RequestBody AttendanceRequestDTO dto) {
+            return ResponseEntity.ok(attendanceService.saveAttendance(dto));
+        }
+
+        @PostMapping("/bulk")
+        public ResponseEntity<List<Attendance>> createBulk(@RequestBody List<AttendanceRequestDTO> dtos) {
+            return ResponseEntity.ok(attendanceService.saveBulkAttendance(dtos));
+        }
+
+        @GetMapping("/section/{sectionId}")
+        public ResponseEntity<List<Attendance>> getBySectionAndDate(
+                @PathVariable Long sectionId,
+                @RequestParam(required = false) String date) {
+
+            LocalDate targetDate = (date != null) ? LocalDate.parse(date) : LocalDate.now();
+            return ResponseEntity.ok(attendanceService.getAttendanceBySectionAndDate(sectionId, targetDate));
+        }
     }
 
-    // Get attendance by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<AttendanceResponseDTO> getAttendanceById(@PathVariable Long id) {
-        AttendanceResponseDTO responseDTO = attendanceService.getAttendanceById(id);
-        return ResponseEntity.ok(responseDTO);
-    }
-
-    // Get all attendances
-    @GetMapping
-    public ResponseEntity<List<AttendanceResponseDTO>> getAllAttendances() {
-        List<AttendanceResponseDTO> list = attendanceService.getAllAttendances();
-        return ResponseEntity.ok(list);
-    }
-
-    // Update attendance
-    @PutMapping("/{id}")
-    public ResponseEntity<AttendanceResponseDTO> updateAttendance(@PathVariable Long id,
-                                                                  @RequestBody AttendanceRequestDTO requestDTO) {
-        AttendanceResponseDTO responseDTO = attendanceService.updateAttendance(id, requestDTO);
-        return ResponseEntity.ok(responseDTO);
-    }
-
-    // Delete attendance
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAttendance(@PathVariable Long id) {
-        attendanceService.deleteAttendance(id);
-        return ResponseEntity.noContent().build();
-    }
-}
