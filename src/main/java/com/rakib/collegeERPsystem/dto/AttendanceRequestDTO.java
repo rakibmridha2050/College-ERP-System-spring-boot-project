@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class AttendanceRequestDTO {
-
+    private Long enrollmentId;
     private Long studentId;
     private Long facultyId;
     private Long classId;
