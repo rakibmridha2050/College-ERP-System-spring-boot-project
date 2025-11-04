@@ -1,7 +1,10 @@
 package com.rakib.collegeERPsystem.dto.payment;
 
 
+import com.rakib.collegeERPsystem.enums.FeeStatus;
 import lombok.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -10,10 +13,16 @@ import java.util.List;
 @Builder
 public class FeeStructureDTO {
     private Long id;
-    private String structureName;     // e.g. "BSc CSE - Semester 1"
-    private String academicYear;
-    private String semester;
-    private Boolean isActive;
-
-    private List<FeeComponentDTO> feeComponents; // Each structure has multiple components
+    private String program;
+    private Integer semester;
+    private String studentCategory;
+    private String academicSession;
+    private Double totalAmount;
+    private FeeStatus status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String createdBy;
+    private String updatedBy;
+    private Boolean active;
+    private List<FeeComponentDTO> feeComponents;
 }

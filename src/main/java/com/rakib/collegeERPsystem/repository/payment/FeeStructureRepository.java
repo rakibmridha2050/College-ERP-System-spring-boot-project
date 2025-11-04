@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface FeeStructureRepository extends JpaRepository<FeeStructure, Long> {
     List<FeeStructure> findByStatus(FeeStatus status);
-    List<FeeStructure> findByProgramAndSemesterAndAcademicSession(
-            String program, int semester, String academicSession);
+//    List<FeeStructure> findByProgramAndSemesterAndAcademicSession(
+//            String program, int semester, String academicSession);
 }

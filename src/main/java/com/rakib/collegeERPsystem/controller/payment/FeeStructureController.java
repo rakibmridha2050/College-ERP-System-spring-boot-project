@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/fee-structures")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*") // ✅ Important if Angular is on localhost:4200
 public class FeeStructureController {
 
     private final FeeStructureService service;

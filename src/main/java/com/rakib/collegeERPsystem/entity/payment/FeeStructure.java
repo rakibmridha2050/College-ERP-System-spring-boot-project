@@ -19,28 +19,28 @@ public class FeeStructure extends BaseEntity {
 
 
 
-    @Column(nullable = false)
-    @NotBlank(message = "Program name is required")
+//    @Column(nullable = false)
+//    @NotBlank(message = "Program name is required")
     private String program; // e.g. BSc in CSE, BBA, etc.
 
-    @Column(nullable = false)
-    @Min(value = 1)
+//    @Column(nullable = false)
+//    @Min(value = 1)
     private int semester;
 
-    @Column(name = "student_category", nullable = false)
-    @NotBlank(message = "Student category is required")
+//    @Column(name = "student_category", nullable = false)
+//    @NotBlank(message = "Student category is required")
     private String studentCategory; // Regular, Evening, International
 
-    @Column(name = "academic_session", nullable = false)
-    @NotBlank(message = "Academic session is required")
+//    @Column(name = "academic_session", nullable = false)
+//    @NotBlank(message = "Academic session is required")
     private String academicSession; // e.g. 2024-2025
 
-    @Column(name = "total_amount", nullable = false)
-    @PositiveOrZero
+//    @Column(name = "total_amount", nullable = false)
+//    @PositiveOrZero
     private Double totalAmount;
 
-    @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
+//    @Column(name = "status", nullable = false)
+//    @Enumerated(EnumType.STRING)
     private FeeStatus status = FeeStatus.ACTIVE;
 
     // 🔗 One-to-Many with FeeComponent
